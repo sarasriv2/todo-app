@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="todo-app.component.scss" />
+  </head>
+  <body>
+    <div class="background">
+      <img
+        src="bg-desktop-dark.jpg" 
+        alt="Banner"
+        class="banner-image"
+      />
+      <div class="title">
+        <h1>T o d o</h1>
+      </div>
+
+      <div class="add todo">
+        <input
+          type="text"
+          placeholder="Create a new goal..."
+          [(ngModel)]="newGoal.text"
+          (keyup.enter)="addGoal()"
+        />
+      </div>
+
+      <ul>
+        <li *ngFor="let goal of goals">
+          <input type="checkbox" [(ngModel)]="goal.completed" />
+          <span [ngClass]="{ completed: goal.completed }">{{ goal.text }}</span>
+        </li>
+      </ul>
+
+      <div class="attribution">
+        Challenge by
+        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+          >Frontend Mentor</a
+        >
+        . Coded by <a href="#">Sara and Sharon</a>.
+      </div>
+    </div>
+  </body>
+</html>

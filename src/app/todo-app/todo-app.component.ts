@@ -12,20 +12,21 @@ import { FormsModule } from '@angular/forms';
 })
 
 export class TodoAppComponent {
-  // The model to bind with input fields
+
   newGoal = { text: '', completed: false };
 
-  // Array to store the list of goals
   goals: { text: string; completed: boolean }[] = [];
 
-  // Function to add a new goal
-  addGoal() {
-    // Ensure that the input text is not empty
-    if (this.newGoal.text.trim()) {
-      // Push the new goal to the goals array
+  addTodo(event: KeyboardEvent) {
+    if (event.key === 'Enter'){
+      if (this.newGoal.text.trim()) {
+   
       this.goals.push({ text: this.newGoal.text, completed: false });
-      // Clear the input field after adding the goal
+
+      console.log(this.newGoal);
       this.newGoal.text = '';
+      }
     }
   }
+
 }

@@ -17,32 +17,54 @@
         alt="Banner"
         class="banner-image"
       />
-      <div class="title">
-        <h1>T o d o</h1>
-      </div>
 
-      <div class="add todo">
-        <input
-          type="text"
-          placeholder="Create a new goal..."
-          [(ngModel)]="newGoal.text"
-          (keyup.enter)="addGoal()"
-        />
-      </div>
+      <div class="comps">
+          <div class="title">
+            <h1>T O D O</h1>
+          </div>
+          <img class="toggle" src="images/icon-sun.svg">
 
-      <ul>
-        <li *ngFor="let goal of goals">
-          <input type="checkbox" [(ngModel)]="goal.completed" />
-          <span [ngClass]="{ completed: goal.completed }">{{ goal.text }}</span>
-        </li>
-      </ul>
-
-      <div class="attribution">
-        Challenge by
-        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
-          >Frontend Mentor</a
-        >
-        . Coded by <a href="#">Sara and Sharon</a>.
+          <div class="add-todo">
+            <input
+              type="text"
+              placeholder="Create a new todo"
+              [(ngModel)]="newGoal.text"
+              (keydown)="addTodo($event)"
+            />
+          </div>
+          
+          <div 
+            cdkDropList 
+            (cdkDropListDropped)="drop($event)" 
+            class="goals-list">
+            <div *ngFor="let goal of filteredGoals" cdkDrag>
+              <div class="todo-item">
+                <label class="check-box">
+                  <input 
+                    type="checkbox" 
+                    [checked]="goal.completed" 
+                    (change)="toggleGoalCompletion(goal)" 
+                  />
+                  <span class="check-mark"></span>
+                </label>
+                <p class="todo-text" [ngClass]="{'completed': goal.completed}">
+                  {{ goal.text }}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="bottom-nav">
+            <span>{{ remainingGoalsCount }} goals left</span>
+            <div class="filters">
+              <button (click)="setFilter('all')" [class.active]="filter === 'all'">All</button>
+              <button (click)="setFilter('active')" [class.active]="filter === 'active'">Active</button>
+              <button (click)="setFilter('completed')" [class.active]="filter === 'completed'">Completed</button>
+            </div>
+            <button (click)="clearCompleted()">Clear Completed</button>
+          </div>     
+          <div class="dragndrop">
+            <p>Drag and drop to reorder list</p>
+          </div>          
       </div>
     </div>
   </body>

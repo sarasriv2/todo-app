@@ -13,37 +13,43 @@
   <body>
     <div class="background">
       <img
-        src="bg-desktop-dark.jpg" 
+        src="images/bg-desktop-dark.jpg" 
         alt="Banner"
         class="banner-image"
       />
-      <div class="title">
-        <h1>T o d o</h1>
+
+      <div class="comps">
+      
+          <div class="title">
+            <h1>T O D O</h1>
+          </div>
+          <img class="toggle" src="images/icon-sun.svg">
+
+          <div class="add-todo">
+            <input
+              type="text"
+              placeholder="Create a new todo"
+              [(ngModel)]="newGoal.text"
+              (keydown)="addTodo($event)"
+            />
+          </div>
+    
+          <div *ngFor="let goal of goals">
+            <div class="todo-item">
+              <label class="check-box">
+                <input type="checkbox"/>
+                <span class="check-mark"></span>
+              </label>
+              <p class="todo-text" [ngClass]="{'completed': goal.completed}">{{ goal.text }}</p>
+            </div>
+          </div>
       </div>
 
-      <div class="add todo">
-        <input
-          type="text"
-          placeholder="Create a new goal..."
-          [(ngModel)]="newGoal.text"
-          (keyup.enter)="addGoal()"
-        />
-      </div>
+ 
+    
 
-      <ul>
-        <li *ngFor="let goal of goals">
-          <input type="checkbox" [(ngModel)]="goal.completed" />
-          <span [ngClass]="{ completed: goal.completed }">{{ goal.text }}</span>
-        </li>
-      </ul>
 
-      <div class="attribution">
-        Challenge by
-        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
-          >Frontend Mentor</a
-        >
-        . Coded by <a href="#">Sara and Sharon</a>.
-      </div>
+    
     </div>
   </body>
 </html>
